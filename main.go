@@ -114,6 +114,9 @@ func checkGlobals(c *cli.Context) error {
 }
 
 func _import(c *cli.Context) error {
+	if err := checkGlobals(c); err != nil {
+		return err
+	}
 	bytes, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
 		return cli.NewExitError(errors.Wrap(err, "could not read import input"), 2)
